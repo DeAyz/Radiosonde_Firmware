@@ -7,6 +7,8 @@ die einen Betrieb als konventionelle Radiosonde erlaubt.
 Dazu soll eine Bibliothek zur Kommunikation mit einem GPS-Modul im NMEA auf der STM32 Plattform (BareMetal, kein HAL)geschrieben werden,
 und eine Beispielanwendung entwickelt werden, die zur VaisalaRS41 kompatible Telemetrie sendet.
 
+
+
 ## Projektplan
 
 # Projektstart:
