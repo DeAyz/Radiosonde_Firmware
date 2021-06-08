@@ -1,5 +1,7 @@
 # Project_Radiosonde
 
+## Projektplan
+
 ## Beschreibung
 
 Für eine im Institut entwickelte Radiosonde soll auf Basis einer entwickelten Radiobibliothek eine Firmware entwickelt werden,
@@ -7,9 +9,26 @@ die einen Betrieb als konventionelle Radiosonde erlaubt.
 Dazu soll eine Bibliothek zur Kommunikation mit einem GPS-Modul im NMEA auf der STM32 Plattform (BareMetal, kein HAL)geschrieben werden,
 und eine Beispielanwendung entwickelt werden, die zur VaisalaRS41 kompatible Telemetrie sendet.
 
+Es soll eine Firmware entwickelt werden, der die Dynamische Werte vom GPS-Modul zum Microcontroller überträgt.
+Die Firmware soll so entwickelt werden, dass man die in jedem beliebigen Microcontroller der STM32 Reihe portieren kann.
 
+## Hardware
 
-## Projektplan
+	- PC
+
+	- Microcontroller (STM32f100) + Radio IC + GNSS Emüfänger
+	
+	- GNSS Empfänger (Für den PC)
+	
+	- GPS-Repeater (Zum Empfangen von GPS-Signalen)
+	
+## Software
+
+	- CrossWorks CrossStudio for ARM (Hauptentwicklungsplattform für die Firmware)
+	
+	- u-Center (Für Funktionsweise und Parametrierung der GNSS-Module)
+ 
+## Eckdaten
 
 # Projektstart:
 
