@@ -2,6 +2,14 @@
 
 ## Beschreibung
 
+Für eine im Institut entwickelte Radiosonde soll aufBasis einer entwickeltenRadiobibliothek eine Firmware entwickelt werden,
+
+die einen Betrieb alskonventionelle Radiosonde erlaubt. 
+
+Dazu soll eineBibliothek zur Kommunikation miteinem GPS-Modul im NMEA auf der STM32 Plattform (BareMetal, kein HAL)geschrieben werden,
+
+und eine Beispielanwendung entwickeltwerden, die zur VaisalaRS41 kompatible Telemetrie sendet.
+
 ## Projektplan
 
 # Projektstart:
@@ -9,7 +17,7 @@
 	
 	- 09.06.21	Einsteig: Mit Microcontroller vertraut machen. Übung: Blinklicht					#[ ]
 	
-#	- 10.06.21	Vorstellung: Zwischenstand+Projektplanung											#[ ]
+	- 10.06.21	Vorstellung: Zwischenstand+Projektplanung											#[ ]
 	
 	
 # Projektmitte:
@@ -21,7 +29,7 @@
 	
 	- 29.06.21	Firmware entwicklung (Programmierung)												#[ ]
 	
-#	- 01.07.21	Vorstellung: Projektfortschritt														#[ ]
+	- 01.07.21	Vorstellung: Projektfortschritt														#[ ]
 	
 
 #Projektende:
@@ -29,8 +37,8 @@
 	
 	- 10.07.21	Ende der Firmware entwicklung. Dokumentationen in Git-Repository					#[ ]
 	
-#	- 15.07.21	Abschlusspräsentation																#[ ]
+	- 15.07.21	Abschlusspräsentation																#[ ]
 	
-#	- 18.07.21	Projektabgabe																		#[ ]
+	- 18.07.21	Projektabgabe																		#[ ]
 	
 
