@@ -3,11 +3,8 @@
 ## Beschreibung
 
 Für eine im Institut entwickelte Radiosonde soll auf Basis einer entwickelten Radiobibliothek eine Firmware entwickelt werden,
-
 die einen Betrieb als konventionelle Radiosonde erlaubt. 
-
 Dazu soll eine Bibliothek zur Kommunikation mit einem GPS-Modul im NMEA auf der STM32 Plattform (BareMetal, kein HAL)geschrieben werden,
-
 und eine Beispielanwendung entwickelt werden, die zur VaisalaRS41 kompatible Telemetrie sendet.
 
 ## Projektplan
@@ -34,7 +31,7 @@ und eine Beispielanwendung entwickelt werden, die zur VaisalaRS41 kompatible Tel
 [ ]	- 01.07.21	Vorstellung: Projektfortschritt														
 	
 
-#Projektende:
+# Projektende:
 
 [ ]	- 06.07.21	Firmware entwicklung ggf, Rücksprache bei Probleme									
 	
