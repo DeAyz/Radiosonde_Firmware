@@ -32,16 +32,16 @@ Die Firmware soll so entwickelt werden, dass man die in jedem beliebigen Microco
 
 # Projektstart:
 
-[X]	- 03.06.21	Anleitung für Hardware und Software													
+[X]	- 03.06.21	Anleitung für Hardware und Software und erste Betriebsnahme											
 	
-[ ]	- 09.06.21	Einsteig: Mit Microcontroller vertraut machen. Übung: Blinklicht					
+[X]	- 09.06.21	Github Repository und erste Markdown mit Projektverlauf anlegen.					
 	
 [ ]	- 10.06.21	Vorstellung: Zwischenstand+Projektplanung											
 	
 	
 # Projektmitte:
 
-[ ]	- 14.06.21	Einstieg: Mit Microcontroller vertraut machen. Übung: Kommunikation pc zum Board	
+[ ]	- 13.06.21	Einstieg: Mit Microcontroller vertraut machen.
 	
 [ ]	- 18.06.21	Firmware entwicklung (Programmierung)												
 	
