@@ -36,12 +36,12 @@ Die Firmware soll so entwickelt werden, dass man die in jedem beliebigen Microco
 	
 [X]	- 09.06.21	Github Repository und erste Markdown mit Projektverlauf anlegen.					
 	
-[ ]	- 10.06.21	Vorstellung: Zwischenstand+Projektplanung											
+[X]	- 10.06.21	Vorstellung: Zwischenstand+Projektplanung											
 	
 	
 # Projektmitte:
 
-[ ]	- 13.06.21	Einstieg: Mit Microcontroller vertraut machen.
+[X]	- 13.06.21	Einstieg: Mit Microcontroller vertraut machen. LED Blinken und Daten Transmitte,Recieve
 	
 [ ]	- 18.06.21	Firmware entwicklung (Programmierung)												
 	
