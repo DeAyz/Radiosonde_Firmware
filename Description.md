@@ -43,7 +43,7 @@ Die Firmware soll so entwickelt werden, dass man die in jedem beliebigen Microco
 
 [X]	- 13.06.21	Einstieg: Mit Microcontroller vertraut machen. LED Blinken und Daten Transmitte,Recieve
 	
-[ ]	- 18.06.21	Firmware entwicklung (Programmierung)												
+[X]	- 18.06.21	Firmware entwicklung (Programmierung)												
 	
 [ ]	- 25.06.21	Zwischenstand ggf. Rücksprache bei Probleme											
 	
