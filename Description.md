@@ -45,9 +45,9 @@ Die Firmware soll so entwickelt werden, dass man die in jedem beliebigen Microco
 	
 [X]	- 18.06.21	Firmware entwicklung (Programmierung)												
 	
-[ ]	- 25.06.21	Zwischenstand ggf. Rücksprache bei Probleme											
+[X]	- 25.06.21	Zwischenstand ggf. Rücksprache bei Probleme											
 	
-[ ]	- 29.06.21	Firmware entwicklung (Programmierung)												
+[X]	- 29.06.21	Firmware entwicklung (Programmierung)												
 	
 [ ]	- 01.07.21	Vorstellung: Projektfortschritt														
 	
