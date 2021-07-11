@@ -49,14 +49,16 @@ Die Firmware soll so entwickelt werden, dass man die in jedem beliebigen Microco
 	
 [X]	- 29.06.21	Firmware entwicklung (Programmierung)												
 	
-[ ]	- 01.07.21	Vorstellung: Projektfortschritt														
+[X]	- 01.07.21	Vorstellung: Projektfortschritt														
 	
 
 # Projektende:
 
-[ ]	- 06.07.21	Firmware entwicklung ggf, Rücksprache bei Probleme									
+[X]	- 06.07.21	Firmware entwicklung ggf, Rücksprache bei Probleme									
 	
-[ ]	- 10.07.21	Ende der Firmware entwicklung. Dokumentationen in Git-Repository					
+[X]	- 10.07.21	Firmware entwicklung
+
+[ ] - 13.07.21 	Ende der Firmware entwicklung. Dokumentationen in Git-Repository				
 	
 [ ]	- 15.07.21	Abschlusspräsentation																
 	
