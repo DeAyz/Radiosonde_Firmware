@@ -96,17 +96,18 @@ Laut Reference Manual wie gefolgt:
 
 
 Nun muss  abgefragt werden ob der Daten Register leer ist. (Code im Anhang)
-Voll -> ASCII Zeichen mit Variable deklarieren (character).
-Leer -> Warten bis Daten im Daten Register sind.
+	Voll -> ASCII Zeichen mit Variable deklarieren (character).
+	Leer -> Warten bis Daten im Daten Register sind.
+
 Als nächstes werden die GPS Daten in ASCII Zeichen aus dem Daten Register gelesen und mit einer Variable deklariert und zeitgleich wird es gelöscht (In Schleife setzen.).
 
 Nun soll die Variable mit den ASCII Zeichen nach Längen und Breitengrad ausgegeben. (Code im Anhang, nur in C++)
-	- Zunächst wird das character mit dem $GNRMC.... rausgefiltert.
-	- Da es die erforderliche Daten verfügt (Latitude, Longtitude, indicator) die gebraucht wird.
-	- Nun werden die character für dan Breiten- und Längengrad in einem neuen String Kopiert.
-	- Dann werden die ASCII Zeichen in fließkommazahlen konvertiert.
-	- Nach der konvertierung werden die nach den Längen- und Breitengrade umgerechnet.
-	- Ausgabe in Breiten- und Längengrad.
+		- Zunächst wird das character mit dem $GNRMC.... rausgefiltert.
+		- Da es die erforderliche Daten verfügt (Latitude, Longtitude, indicator) die gebraucht wird.
+		- Nun werden die character für dan Breiten- und Längengrad in einem neuen String Kopiert.
+		- Dann werden die ASCII Zeichen in fließkommazahlen konvertiert.
+		- Nach der konvertierung werden die nach den Längen- und Breitengrade umgerechnet.
+		- Ausgabe in Breiten- und Längengrad.
 
  
 ## Eckdaten
