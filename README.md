@@ -27,6 +27,87 @@ Die Firmware soll so entwickelt werden, dass man die in jedem beliebigen Microco
 	- CrossWorks CrossStudio for ARM (Hauptentwicklungsplattform für die Firmware)
 	
 	- u-Center (Für Funktionsweise und Parametrierung der GNSS-Module)
+
+
+
+## Hardware Zusammenschaltung:
+
+	STM32f100	:::::	uBlox GNSS Repeater
+
+	VCC 3.3V	<--->	Vcc 3.3V
+	PA10(RX)	<--->	TX
+	PA9 (TX)	<--->	RX
+	GND			<--->	GND
+
+## Software: 
+	
+Um die GPS Positionen vom GNSS in dem Microcontroller zu speichern, wird zunächste die entsprechende Register und Ports aktiviert.
+Laut Reference Manual wie gefolgt:
+
+	1. Alternate funtion aktivieren. 
+		RCC->APB2ENR |= (1<<0);
+		
+	2. PortA fregeben.
+		RCC->APB2ENR |= (1<<2);
+		
+	3. USART1 aktivieren.
+		RCC->APB2ENR |= (1<<14);
+		
+	4. PA.9 und PA.10 aktivieren.
+		Die Einstellung, die gebraucht wird:
+		MODE9	[1,1]	-	Output mode, max speed 50 MHZ
+		CNF9 	[1,0]	-	Alternate function output Push-Pull
+		MODE10 	[0,0]	-	Input mode
+		CNF10 	[0,1]	-	Floating Input
+		
+		GPIOA->CRH |= (1<<4);        
+		GPIOA->CRH |= (1<<5);         
+		GPIOA->CRH |= (1<<7);       
+		GPIOA->CRH &= ~(1<<0);        
+		GPIOA->CRH &= ~(1<<8);       
+		GPIOA->CRH &= ~(1<<9);        
+		GPIOA->CRH |= (1<<10);      
+		GPIOA->CRH &= ~(1<<11);    
+		
+	5. Baudrate einstellen.
+		-24 MHz Max. frequenz
+		-9600 Baudrate * 16
+		Rechnung:
+		24.000.000 / (16 * 9600)
+		= 156,25 -> HEX: 9C
+		0,25*16 = 4 -> Hex: 4
+		
+		USART1->BRR = 0x9C4;
+		
+	6. Den Transmitter und Reciever aktivieren.
+		USART1->CR1 |= (1<<2);
+		USART1->CR1 |= (1<<3);
+		
+	7. UART aktivieren.
+		USART1->CR1 |= (1<<13);
+		
+	8. Zuletzt die Flags aktivieren.
+		USART1->CR1 |= (1<<7);
+		USART1->CR1 |= (1<<5);
+
+		Wenn im Status Register,
+		TXE 	= 1 	-> Senden
+		RXNE 	= 1 	-> Daten Register leer
+
+
+Nun muss  abgefragt werden ob der Daten Register leer ist. (Code im Anhang)
+Voll -> ASCII Zeichen mit Variable deklarieren (character).
+Leer -> Warten bis Daten im Daten Register sind.
+Als nächstes werden die GPS Daten in ASCII Zeichen aus dem Daten Register gelesen und mit einer Variable deklariert und zeitgleich wird es gelöscht (In Schleife setzen.).
+
+Nun soll die Variable mit den ASCII Zeichen nach Längen und Breitengrad ausgegeben. (Code im Anhang, nur in C++)
+	- Zunächst wird das character mit dem $GNRMC.... rausgefiltert.
+	- Da es die erforderliche Daten verfügt (Latitude, Longtitude, indicator) die gebraucht wird.
+	- Nun werden die character für dan Breiten- und Längengrad in einem neuen String Kopiert.
+	- Dann werden die ASCII Zeichen in fließkommazahlen konvertiert.
+	- Nach der konvertierung werden die nach den Längen- und Breitengrade umgerechnet.
+	- Ausgabe in Breiten- und Längengrad.
+
  
 ## Eckdaten
 
