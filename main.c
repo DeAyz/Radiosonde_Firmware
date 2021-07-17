@@ -1,82 +1,154 @@
-#include "stm32f10x.h"
-#include "string.h"
-#include "stdlib.h"
-#include "stdarg.h"
-#include <stdint.h>
-#include "stdio.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct
+{
+	int Lat; //latitude_bd;					//Latitude is expanded by 100000 times, and it is actually divided by 100000
+	int Lng; //nshemi_bd;						//North latitude/south latitude, N: north latitude; S: south latitude
+	int IndiNS; //longitude_bd;			  //Longitude is expanded by 100000 times, and it is actually divided by 100000
+	int IndiOW; //ewhemi_bd;						//East longitude/West longitude, E: East longitude; W: West longitude
+}LatLan;
 
 
-void EnableTxRx(void){
+typedef struct
+{
+    float  Lat2;		//longitude
+    float  Lng2;        //latitude
+} E53_ST1_Data_TypeDef;
 
-// 1. Alternate Function für Pins Aktivieren und PORT A aktivieren.
-RCC->APB2ENR |= (1<<0);     //Bit 0 (AF) 
-RCC->APB2ENR |= (1<<2);     // Bit 2 (PORTA)
-// 2. USART 1 aktivieren.
+LatLan latlan;
+static unsigned char gps_uart[1000];
+E53_ST1_Data_TypeDef E53_ST1_Data;
 
-RCC->APB2ENR |= (1<<14);    // BIT 14
-
-// 3. Pins PA9 and PA10 aktivieren. (PA10 Rx / PA9 Tx )
-// MODE9 = 11 I Output mode, max speed 50 MHZ;
-// CNF9 = 10 I Alternate function output Push-Pull
-// MODE10 = 00 I Inpute mode
-// CNF10 = 01 I Floating Input
-
-GPIOA->CRH |= (1<<4);         // Bit 4
-GPIOA->CRH |= (1<<5);         // Bit 5
-GPIOA->CRH |= (1<<7);         // BIT 7
-GPIOA->CRH &= ~(1<<0);        // BIT 0
-GPIOA->CRH &= ~(1<<8);        // Bit 8
-GPIOA->CRH &= ~(1<<9);        // Bit 9
-GPIOA->CRH |= (1<<10);       // BIT 10
-GPIOA->CRH &= ~(1<<11);       // BIT 11
-
-// 4. Baudrate auf 9600 festlegen
-// Clock = 24MHZ, Baudrate = 9600
-// 24MHZ / (16*9600) =  156,25 -> HEX: 9C 
-// 0,25*16 = 4 -> HEX: 4
-
-USART1->BRR = 0x9C4;
-
-// 5. USART Transmitter aktivieren
-USART1->CR1 |= (1<<2);       // BIT 2
-
-// 6.  USART1 Reciever aktivieren
-USART1->CR1 |= (1<<3);       // Bit 3
-
-// 7. USART1 aktivieren
-USART1->CR1 |= (1<<13);       // Bit 13
-USART1->CR1 |= (1<<7);     //TXE Enabled    // Wenn SR TXE = 1, dann senden
-USART1->CR1 |= (1<<5);      //RXNE Enabled  // WENN SR RXNE =1, dann Lese daten register nicht voll
-
-NVIC_EnableIRQ(USART1_IRQn);
+int Komma(int *grade ,int x)
+{
+	int *a = grade;
+	while(x) {
+		if (*grade=='*'||*grade<' '||*grade>'z') {
+                return 1;
+		}
+		if (*grade==',') {
+                x--;
+		}
+		grade++;
+	}
+	return (grade - a);
 }
 
 
 
-int main(void) {
-EnableTxRx();
+
+int String(int a,int b)
+{
+	int Ergebnis = 1;
+	while (b--) {
+        Ergebnis *= a;
+	}
+	return Ergebnis;
 }
 
-#define MAX_LEN 5
-unsigned char counter = 0;
-void clear(void);
-char Daten[MAX_LEN];  // String mit Max länger 
 
-void USART1_IRQHandler(void) {
-while (1) {
-if (USART1->SR & USART_SR_RXNE) {
-char NMEA = USART1->DR;     // Daten aus Daten Register and NMEA
-Daten[counter++] = NMEA;    // Datenlängezählen
-printf("%c", NMEA);
+
+
+int String2(int *grade, int *x)
+{
+	int *p = grade;
+	int ires = 0,fres = 0;
+	int ilen = 0,flen = 0,i;
+	int mask = 0;
+	int res;
+	while(1)
+	{
+		if(*p=='-'){mask |= 0x02;p++;}//Indicates that there are negative numbers
+		if(*p==','||*p=='*')break;//End character encountered
+		if(*p=='.'){mask |= 0x01;p++;}//Encountered a decimal point
+		else if(*p>'9'||(*p<'0'))//The number is not between 0 and 9, indicating illegal characters
+		{
+			ilen = 0;
+			flen = 0;
+			break;
+		}
+		if(mask&0x01)flen++;//The number of decimal places
+		else ilen++;//str length plus one
+		p++;//Next character
+	}
+	if(mask&0x02)grade++;//Move to the next place, remove the negative sign
+	for(i=0;i<ilen;i++)//Get the integer part of the data
+	{
+		ires += NMEA_Pow(10,ilen-1-i)*(grade[i]-'0');
+	}
+	if(flen>5)flen=5;//Take up to five decimal places
+	*dx = flen;
+	for(i=0;i<flen;i++)//Get the fractional data
+	{
+		fres +=NMEA_Pow(10,flen-1-i)*(grade[ilen+1+i]-'0');
+	}
+	res = ires*NMEA_Pow(10,flen)+fres;
+	if(mask&0x02)res = -res;
+	return res;
+}
+
+
+
+
+
+void Stringanalyse(LatLan *grade ,int *x)
+{
+	int *E;
+	int Bit;
+	int temp;
+	int Dez;
+	float temp2;
+
+
+	E = (int*)strstr((const char *)x, "$GPRMC");//"$GPRMC", there are often cases where & is separated from GPRMC, so only GPRMC is judged.
+
+	Bit = Komma(E, 3);								//Get the latitude
+	if (Bit != 1) {
+
+		temp = String2 (E + Bit, &Dez);
+		grade->Lat = temp / NMEA_Pow(10, Dez + 2);	//Get °
+		temp2 = temp % NMEA_Pow(10, Dez +2 );				//Get'
+		grade->Lat = grade->Lat * NMEA_Pow(10, 5) + (temp2* NMEA_Pow(10, 5 - Dez)) / 60;//Convert to °
+	}
+	Bit = Komma(E, 4);								//South latitude or north latitude
+	if (Bit != 1) grade->IndiNS = *(E + Bit);
+ 	Bit = Komma(E, 5);								//Get longitude
+	if (Bit != 1)
+	{
+		temp = String2 (E + Bit, &Dez);
+		grade->Lng = temp / NMEA_Pow(10, Dez + 2);	//Get °
+		temp2 = temp % NMEA_Pow(10, Dez + 2);				//Get'
+		grade->Lng = grade->Lng * NMEA_Pow(10, 5) + (temp2 * NMEA_Pow(10, 5 - Dez)) / 60;//Convert to °
+	}
+	Bit = Komma(E ,6);								//East longitude or west longitude
+	if (Bit != 1)grade->IndiOW = *(E + Bit);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int main()
+{
+
+char NMEA[] = "$GNRMC,132453.00,A,5125.25376,N,-00645.28448,E,0.262,,130721,,,A*6F<\r> < \n>";
+
+
+while (1)
+  {
+
 
   }
- }
 }
-
-
-void clear(void){  // RX Zurücksetzen/Löschen
-int i;
-for (i = 0; i < MAX_LEN; i++) Daten[i] = 0;
-counter = 0;
-}
-
