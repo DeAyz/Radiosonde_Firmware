@@ -12,6 +12,13 @@ und eine Beispielanwendung entwickelt werden, die zur VaisalaRS41 kompatible Tel
 Es soll eine Firmware entwickelt werden, der die Dynamische Werte vom GPS-Modul zum Microcontroller überträgt.
 Die Firmware soll so entwickelt werden, dass man die in jedem beliebigen Microcontroller der STM32 Reihe portieren kann.
 
+## Aufgabenstellung
+
+1. Ein Board code programmieren um die GPS Daten vom GPS Repeater mithilfe von einem uBlox GNSS Empfänger zu empfangen und im Microcontroller zu speichern.
+Anschließend sollen die Daten abrufbar sein und in den NMEA übersetzungscode weiterverarbeitet werden.
+2. Ein NMEA konvertierungscode schreiben, der die entsprechende Koordinaten im Daten Register des microcontrollers STM32f100 in Längen- und Breitengrad ausgibt.
+Die Daten müssen als erstes von ASCII Zeichen in fließkommazahlen konvertiert werden und mit den entsprechenden Rechnungen in Längen- und Breitengrad ausgeben.
+
 ## Hardware
 
 	- PC
