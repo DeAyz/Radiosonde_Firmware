@@ -126,17 +126,20 @@ Nun soll die Variable mit den ASCII Zeichen nach Längen und Breitengrad ausgege
 ## Probleme:
 
 Es gab zunächst einige Probleme beim Projektstart. <br>
-			- Kaum brauchbare GPS Daten. -> Lösung: Standortwechsel(Anderes Zimmer). <br>
-			- Projektaufgabe falsch verstanden. -> Lösung: Meeting mit Projektgeber. <br>
+
+			 Kaum brauchbare GPS Daten. -> Lösung: Standortwechsel(Anderes Zimmer). <br>
+			 Projektaufgabe falsch verstanden. -> Lösung: Meeting mit Projektgeber. <br>
 			
 Zum Mitte des Projekts. <br>
-			- CrossStudion: Register beim builden wurden nicht aktiviert. -> Lösung: Softwarefehler =>  Mehrmals hintereinander Builden. <br>
-			- NMEA Converter code in Programmiersprach C. -> Lösung: Code erst in C++ geschrieben und in C schrittweise umschrieben. <br>
+
+			 CrossStudion: Register beim builden wurden nicht aktiviert. -> Lösung: Softwarefehler =>  Mehrmals hintereinander Builden. <br>
+			 NMEA Converter code in Programmiersprach C. -> Lösung: Code erst in C++ geschrieben und in C schrittweise umschrieben. <br>
+			 
 Am Ende des Projekts <br>
 
-			- Board Code empfängt keine Vollständige GPS Daten. -> Mögliche Lösungen: Interruptfunktion überfordert(zu schnell)?; Baudrate und Clock falsch?; <br>
-			- Durch falsche Verkabelung, das Board beschädigt. -> Lösung: Hardware muss ausgetauscht werden. <br>
-			- Board kaputt -> Keine Finale lösung zum Projekt möglich. <br>
+			 Board Code empfängt keine Vollständige GPS Daten. -> Mögliche Lösungen: Interruptfunktion überfordert(zu schnell)?; Baudrate und Clock falsch?; <br>
+			 Durch falsche Verkabelung, das Board beschädigt. -> Lösung: Hardware muss ausgetauscht werden. <br>
+			 Board kaputt -> Keine Finale lösung zum Projekt möglich. <br>
 		
 ## Eckdaten
 
